@@ -1,0 +1,26 @@
+name: "Test actions syntax"
+
+on:
+  workflow_call:
+    inputs:
+      val1:
+        description: 'value 1'
+        required: true
+        type: boolean
+      val2:
+        description: 'value 2'
+        required: true
+        type: boolean
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test 1
+        if: ${{ inputs.val1 }} && ${{ inputs.val2 }}
+        shell: bash
+        run: echo "test 1 ran"
+
+      - name: Test 2
+        if: ${{ inputs.val1 && inputs.val2 }}
+        shell: bash
+        run: echo "test 2 ran"
