@@ -1,7 +1,7 @@
 name: "Test actions syntax"
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       val1:
         description: 'value 1'
