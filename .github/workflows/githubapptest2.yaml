@@ -6,6 +6,7 @@ jobs:
   demo_app_commit:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Sets up app token clones repo and sets up git config for actions users
         uses: ./.github/actions/setup-github-action
         with:
