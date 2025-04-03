@@ -29,8 +29,8 @@ runs:
       id: get-user-id
       shell: bash
       run: |
-        export user-id="$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)"
-        echo user-id="$user-id" >> "$GITHUB_OUTPUT"
+        USER_ID="$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)"
+        echo user-id="$USER_ID" >> "$GITHUB_OUTPUT"
       env:
         GH_TOKEN: ${{ steps.app-token.outputs.token }}
     - name: Set git config for bot user
