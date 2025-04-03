@@ -18,6 +18,7 @@ runs:
         # required
         app-id: ${{ inputs.APP_ID }}
         private-key: ${{ inputs.APP_PRIVATE_KEY }}
+        permission-contents: write
     - name: check out the repo using the token
       uses: actions/checkout@v4
       with:
