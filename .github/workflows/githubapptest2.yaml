@@ -1,0 +1,19 @@
+name: "Test github actions token generation with reusable action"
+
+on:
+  workflow_dispatch:
+jobs:
+  demo_app_commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sets up app token clones repo and sets up git config for actions users
+        uses: ./.github/actions/setup-github-action
+        with:
+          APP_ID: ${{ vars.APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Test making a change and committing to the branch
+        run: |
+          echo "testing" "$(date)" >> test.md
+          git add .
+          git commit -m "Auto-generated changes"
+          git push
