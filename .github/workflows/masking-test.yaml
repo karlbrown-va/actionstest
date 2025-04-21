@@ -1,0 +1,17 @@
+name: "Test masking"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bash-example:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "Mona The Octocat"
+    steps:
+      - name: add mask
+        shell: bash
+        run: echo "::add-mask::$MY_NAME"
+      - name: test mask
+        shell: bash
+        run: echo "my_name is $MY_NAME"
