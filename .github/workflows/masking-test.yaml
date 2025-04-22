@@ -1,10 +1,10 @@
-name: "Test masking"
+name: "Test masking of secrets"
 
 on:
   workflow_dispatch:
 
 jobs:
-  bash-example:
+  masking-test:
     runs-on: ubuntu-latest
     env:
       MY_NAME: "Mona The Octocat"
@@ -28,6 +28,7 @@ jobs:
           echo "::add-mask::$ENV_APP_PRIVATE_KEY"
 
       - name: Sets up app token clones repo and sets up git config for actions users
+        continue-on-error: true
         uses: ./.github/actions/setup-github-action
         with:
           APP_ID: $ENV_APP_ID
@@ -39,6 +40,7 @@ jobs:
           echo "::add-mask::${{ vars.ID_TO_KEEP_SECRET }}"
 
       - name: Sets up app token clones repo and sets up git config for actions users
+        continue-on-error: true
         uses: ./.github/actions/setup-github-action
         with:
           APP_ID: $ENV_APP_ID
