@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MY_NAME: "Mona The Octocat"
-      APP_ID: "appid"
-      APP_PRIVATE_KEY: "appprivatekey"
+      ENV_APP_ID: "appid"
+      ENV_APP_PRIVATE_KEY: "appprivatekey"
     steps:
       - name: add mask
         shell: bash
@@ -24,11 +24,22 @@ jobs:
       - name: add mask
         shell: bash
         run: |
-          echo "::add-mask::$APP_ID"
-          echo "::add-mask::$APP_PRIVATE_KEY"
+          echo "::add-mask::$ENV_APP_ID"
+          echo "::add-mask::$ENV_APP_PRIVATE_KEY"
 
       - name: Sets up app token clones repo and sets up git config for actions users
         uses: ./.github/actions/setup-github-action
         with:
-          APP_ID: $APP_ID
-          APP_PRIVATE_KEY: $APP_PRIVATE_KEY
+          APP_ID: $ENV_APP_ID
+          APP_PRIVATE_KEY: $ENV_APP_PRIVATE_KEY
+
+      - name: add mask
+        shell: bash
+        run: |
+          echo "::add-mask::${{ vars.ID_TO_KEEP_SECRET }}"
+
+      - name: Sets up app token clones repo and sets up git config for actions users
+        uses: ./.github/actions/setup-github-action
+        with:
+          APP_ID: $ENV_APP_ID
+          APP_PRIVATE_KEY: ${{ vars.ID_TO_KEEP_SECRET }}
