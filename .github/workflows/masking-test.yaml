@@ -37,11 +37,12 @@ jobs:
       - name: add mask
         shell: bash
         run: |
-          echo "::add-mask::${{ vars.ID_TO_KEEP_SECRET }}"
+          echo "::add-mask::${{ vars.SHORT_PASSWORD_TO_KEEP_PRIVATE }}"
+          echo "::add-mask::${{ vars.LONG_KEY_TO_KEEP_SECRET }}"
 
       - name: Sets up app token clones repo and sets up git config for actions users
         continue-on-error: true
         uses: ./.github/actions/setup-github-action
         with:
-          APP_ID: $ENV_APP_ID
-          APP_PRIVATE_KEY: ${{ vars.ID_TO_KEEP_SECRET }}
+          APP_ID: ${{ vars.SHORT_PASSWORD_TO_KEEP_PRIVATE }}
+          APP_PRIVATE_KEY: ${{ vars.LONG_KEY_TO_KEEP_SECRET }}
